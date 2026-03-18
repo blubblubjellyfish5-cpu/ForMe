@@ -564,7 +564,9 @@
     // ── STEP 1: File ko Storage mein upload karo ──
     // `uploads` = bucket ka naam (jo tumne Supabase mein banaya)
     // `Date.now()` = unique naam dene ke liye timestamp
-    const filePath = `${Date.now()}_${selectedFile.name}`;
+    const cleanName = selectedFile.name
+  .replace(/[^a-zA-Z0-9.\-_]/g, "_");
+const filePath = `${Date.now()}_${cleanName}`;
 
     const { error: storageError } = await sb.storage
       .from("uploads")          // bucket: "uploads"
